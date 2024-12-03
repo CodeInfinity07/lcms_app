@@ -8,6 +8,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>LT - Ludo Tournament</title>
 
+        <link rel="icon" href="images/fav.png" type="image/x-icon">
+        <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/fontawesome.min.css">
         <link rel="stylesheet" href="css/slick.css">
