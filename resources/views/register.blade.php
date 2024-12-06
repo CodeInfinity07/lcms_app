@@ -78,7 +78,20 @@
                                             required>
                                     </div>
 
-                               
+                                    <div class="form-group">
+                                        <label for="role_id">Role:</label>
+                                        <select id="role_id" name="role_id" required>
+                                            <option value="">Select a role</option>
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>
+                                                    {{ $role->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('role_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
 
                                     <div class="form-group">
                                         <button type="submit" class="cmn-btn">Sign Up Free</button>
