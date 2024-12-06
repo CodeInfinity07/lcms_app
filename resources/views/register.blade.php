@@ -26,21 +26,60 @@
                             <div class="form-area">
                                 <form action="{{ route('register') }}" method="POST">
                                     @csrf
-                                    @error('email')
-                                        <span class="text-danger">Please wait while database connection is being established...</span>
-                                    @enderror
+                                    
                                     <div class="form-group">
-                                        <label>Email</label>
-                                        <input placeholder="Enter your Email" type="email">
+                                        <label for="email">Email:</label>
+                                        <input 
+                                            id="email" 
+                                            placeholder="Enter your Email" 
+                                            name="email" 
+                                            type="email" 
+                                            value="{{ old('email') }}" 
+                                            required>
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
+
                                     <div class="form-group">
-                                        <label>Username</label>
-                                        <input placeholder="Enter your Username" type="text">
+                                        <label for="name">Name:</label>
+                                        <input 
+                                            id="name" 
+                                            placeholder="Enter your Username" 
+                                            name="name" 
+                                            type="text" 
+                                            value="{{ old('name') }}" 
+                                            required>
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
+
                                     <div class="form-group">
-                                        <label>Password</label>
-                                        <input placeholder="Enter your password" type="password">
+                                        <label for="password">Password:</label>
+                                        <input 
+                                            id="password" 
+                                            placeholder="Enter your password" 
+                                            type="password" 
+                                            name="password" 
+                                            required>
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="password_confirmation">Confirm Password:</label>
+                                        <input 
+                                            id="password_confirmation" 
+                                            placeholder="Confirm your password" 
+                                            type="password" 
+                                            name="password_confirmation" 
+                                            required>
+                                    </div>
+
+                               
+
                                     <div class="form-group">
                                         <button type="submit" class="cmn-btn">Sign Up Free</button>
                                     </div>

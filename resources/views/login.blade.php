@@ -24,17 +24,15 @@
                         <div class="login-reg-main text-center">
                             <h4>Welcome To LT</h4>
                             <div class="form-area">
-                                <form action="#">
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input placeholder="Enter your Email" type="email">
+                                        <input placeholder="Enter your Email" name="email" type="email">
                                     </div>
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input placeholder="Enter your password" type="password">
-                                    </div>
-                                    <div class="form-group recover">
-                                        <p>Forgot your password? <a href="#">Recover Password</a></p>
+                                        <input placeholder="Enter your password" name="password" type="password">
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="cmn-btn">Sign In</button>

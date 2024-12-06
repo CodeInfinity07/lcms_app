@@ -4,8 +4,21 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: [
+                'public/assets/scss/app.scss',
+                'public/assets/scss/bootstrap.scss',
+                'public/assets/scss/icons.scss',
+            ],
             refresh: true,
         }),
     ],
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `
+                    // Place global variables or mixins here if needed
+                `,
+            },
+        },
+    },
 });

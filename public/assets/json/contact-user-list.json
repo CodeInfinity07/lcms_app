@@ -1,0 +1,16 @@
+[
+    {
+        "user_id": "#SK25",
+        "memberImg": "",
+        "userName": "Shahid Afridi",
+        "email": "shahid@LT.com",
+        "tags": ["Admin"]
+    },
+    {
+        "user_id": "#SK26",
+        "memberImg": "",
+        "userName": "Abbas Afridi",
+        "email": "abbas@LT.com",
+        "tags": ["Member"]
+    }
+]
