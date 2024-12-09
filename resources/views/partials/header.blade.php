@@ -16,15 +16,13 @@
                         <ul class="navbar-nav main-menu ml-auto">
                             <li><a href="/">Home</a></li>
                             <li><a href="/tournaments">Tournaments</a></li>
-                            <li><a href="/communities">Communities</a></li>
                             <li><a href="/about-us">About</a></li>
                             <li><a href="/contact">Contact</a></li>
                         </ul>
                     </div>
                 </nav>
                 <div class="right-area header-action d-flex align-items-center">
-                    <a href="/login" class="login-btn">Login</a>
-                    <a href="/register" class="cmn-btn">Join Now!</a>
+                    <a href="/login" class="cmn-btn">Login</a>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
-@extends('admin.layouts.master')
+@extends('admin.layouts.master-super-admin')
 
 @section('title')
-    Management
+    Clubs
 @endsection
 @section('css')
     <!-- select2 css -->
@@ -79,48 +79,39 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="newContactModalLabel">Add Staff</h5>
+                    <h5 class="modal-title" id="newContactModalLabel">Add Owner</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form autocomplete="off" method="POST" action="{{ route('owner.create.admin') }}" class="needs-validation createAdmin-form" id="createAdmin-form" novalidate>
+                    <form autocomplete="off" class="createOwner-form" id="createOwner" method="POST"
+                        action="{{ route('super-admin.owner.create') }}" novalidate>
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <input type="hidden" class="form-control" id="userid-input">
                                 <div class="mb-3">
-                                    <label for="name-input" class="form-label">Name</label>
-                                    <input type="text" id="name-input" name="name" class="form-control" placeholder="Enter Name"
-                                        required />
-                                    <div class="invalid-feedback">Please enter name.</div>
+                                    <label for="username-input" class="form-label">Club Name</label>
+                                    <input type="text" id="club-name-input" name="club_name" class="form-control"
+                                        placeholder="Enter Club name" required />
+                                    <div class="invalid-feedback">Please enter Club name.</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="designation-input" class="form-label">Designation</label>
-                                    <select class="form-select" name="designation" id="designation-input">
-                                        <option value="">Select</option>
-                                        @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="invalid-feedback">Please select designation.</div>
+                                    <label for="club-code-inpu" class="form-label">Club Code</label>
+                                    <input type="text" id="club-code-input" name="club_code" class="form-control"
+                                        placeholder="Enter Club code" required />
+                                    <div class="invalid-feedback">Please enter Club code.</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email-input" class="form-label">Email</label>
-                                    <input type="email" id="email-input" name="email" class="form-control" placeholder="Enter email"
-                                        required />
-                                    <div class="invalid-feedback">Please enter email.</div>
+                                    <label for="owner-name" class="form-label">Owner Name</label>
+                                    <input type="text" id="owner-name" name="owner_name" class="form-control"
+                                        placeholder="Enter Owner name" required />
+                                    <div class="invalid-feedback">Please enter Owner name.</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password-input" class="form-label">Password</label>
-                                    <input type="password" id="password-input" name="password" class="form-control" placeholder="Enter Password"
-                                        required />
-                                    <div class="invalid-feedback">Please enter Password.</div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="whatsapp-input" class="form-label">WhatsApp</label>
-                                    <input type="text" id="whatsapp-input" class="form-control"
-                                        placeholder="Enter WhatsApp Number" name="whatsapp_number" required />
-                                    <div class="invalid-feedback">Please enter WhatsApp Number.</div>
+                                    <label for="owner-number" class="form-label">Owner Number</label>
+                                    <input type="text" id="owner-number" name="owner_number" class="form-control"
+                                        placeholder="Enter Owner Number" required />
+                                    <div class="invalid-feedback">Please enter Owner WhatsApp Number.</div>
                                 </div>
                             </div>
 
@@ -129,7 +120,7 @@
                                     <button type="button" class="btn btn-outline-secondary"
                                         data-bs-dismiss="modal">Cancel</button>
                                     <button type="submit" id="addContact-btn" class="btn btn-success">Add
-                                        Member</button>
+                                        Owner</button>
                                 </div>
                             </div>
                         </div>
@@ -180,5 +171,5 @@
     <script src="{{ URL::asset('/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
 
     <!-- ecommerce-customer-list init -->
-    <script src="{{ URL::asset('/assets/js/pages/admin-list.js') }}"></script>
+    <script src="{{ URL::asset('/assets/js/pages/owner-list.js') }}"></script>
 @endsection

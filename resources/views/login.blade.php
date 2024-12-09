@@ -53,9 +53,7 @@
                                                 alt="image"></a>
                                     </div>
                                 </div>
-                                <div class="account">
-                                    <p>Don't have an account? <a href="/register">Sign Up Here</a></p>
-                                </div>
+                    
                             </div>
                         </div>
                     </div>

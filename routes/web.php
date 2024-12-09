@@ -3,15 +3,16 @@
 require __DIR__ . '/admin.php';
 require __DIR__ . '/member.php';
 require __DIR__ . '/owner.php';
-
+require __DIR__ . '/super-admin.php';
+require __DIR__ . '/api.php';
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
 
-Route::get('/', function () {
-    return view('index');
-})->name('root');
+Route::get('/', [DashboardController::class, 'home'])->name('root');
+
 
 Route::get('/login', function () {
     return view('login');

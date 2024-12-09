@@ -9,224 +9,143 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-xl-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="favorite-icon">
-                        <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
-                    </div>
-                    <h5 class="fs-17 mb-2">Tournament #1</h5>
-                    <ul class="list-inline mb-0">
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-account-multiple"></i> 32</p>
-                        </li>
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-seal"></i> $350</p>
-                        </li>
-                    </ul>
-                    <div class="mt-3 hstack gap-2">
-                        <span class="badge rounded-1 badge-soft-success">Completed</span>
-                    </div>
-                    <div class="mt-4 hstack gap-2">
-                        <a href="tournament-details" class="btn btn-soft-success w-100">View</a>
-                        <a href="#applyJobs" data-bs-toggle="modal" class="btn btn-soft-primary w-100">Enroll</a>
+        @foreach ($tournaments as $tournament)
+            <div class="col-xl-3 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="favorite-icon">
+                            <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
+                        </div>
+                        <h5 class="fs-17 mb-2">Tournament #{{ $tournament->id }}</h5>
+                        <ul class="list-inline mb-0">
+                            <li>
+                                <p class="text-muted fs-14 mb-0"><i class="mdi mdi-account-multiple"></i>
+                                    {{ $tournament->participants }}</p>
+                            </li>
+                            <li>
+                                <p class="text-muted fs-14 mb-0"><i class="mdi mdi-seal"></i> ${{ $tournament->prize }}</p>
+                            </li>
+                        </ul>
+                        <div class="mt-3 hstack gap-2">
+                            <span class="badge rounded-1 badge-soft-warning">Upcoming</span>
+                        </div>
+                        <div class="mt-4 hstack gap-2">
+                            <a href="#viewDetails{{ $tournament->id }}" data-bs-toggle="modal"
+                                class="btn btn-soft-success w-100">View</a>
+                            <a href="#applyTournament{{ $tournament->id }}" data-bs-toggle="modal"
+                                class="btn btn-soft-primary w-100">Enroll</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--end col-->
+            <!-- Modal -->
+            <div class="modal fade" id="viewDetails{{ $tournament->id }}" tabindex="-1" style="position: fixed;"
+                aria-labelledby="viewDetailsLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="viewDetailsLabel">Tournament Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#!">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <span>Prize: {{ $tournament->prize }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <span>Participants: {{ $tournament->participants }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <span>Mode:
+                                                @if ($tournament->mode == 1)
+                                                    1 v 1
+                                                @else
+                                                    Team Up
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <span>Format:
+                                                @if ($tournament->format == 1)
+                                                    Single Elimination
+                                                @else
+                                                    Double Elimination
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </div>
 
-        <div class="col-xl-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="favorite-icon">
-                        <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
-                    </div>
-                    <h5 class="fs-17 mb-2">Tournament #2</h5>
-                    <ul class="list-inline mb-0">
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-account-multiple"></i> 64</p>
-                        </li>
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-seal"></i> $350</p>
-                        </li>
-                    </ul>
-                    <div class="mt-3 hstack gap-2">
-                        <span class="badge rounded-1 badge-soft-success">Completed</span>
-                    </div>
-                    <div class="mt-4 hstack gap-2">
-                        <a href="tournament-details" class="btn btn-soft-success w-100">View</a>
-                        <a href="#applyJobs" data-bs-toggle="modal" class="btn btn-soft-primary w-100">Enroll</a>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <span>Fee: {{ $tournament->fee }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <span>Start Date: {{ $tournament->starting_date }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end row-->
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--end col-->
+            <!-- Modal -->
+            <div class="modal fade" id="applyTournament{{ $tournament->id }}" tabindex="-1"
+                aria-labelledby="applyTournamentLabel" style="position: fixed;" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="applyTournamentLabel">Enroll in the tournament</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#!">
+                                <input type="hidden" name="tournament_id" value="{{ $tournament->id }}">
 
-        <div class="col-xl-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="favorite-icon">
-                        <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
-                    </div>
-                    <h5 class="fs-17 mb-2">Tournament #3</h5>
-                    <ul class="list-inline mb-0">
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-account-multiple"></i> 128</p>
-                        </li>
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-seal"></i> $350</p>
-                        </li>
-                    </ul>
-                    <div class="mt-3 hstack gap-2">
-                        <span class="badge rounded-1 badge-soft-success">Completed</span>
-                    </div>
-                    <div class="mt-4 hstack gap-2">
-                        <a href="tournament-details" class="btn btn-soft-success w-100">View</a>
-                        <a href="#applyJobs" data-bs-toggle="modal" class="btn btn-soft-primary w-100">Enroll</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--end col-->
-        <div class="col-xl-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="favorite-icon">
-                        <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
-                    </div>
-                    <h5 class="fs-17 mb-2">Tournament #4</h5>
-                    <ul class="list-inline mb-0">
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-account-multiple"></i> 256</p>
-                        </li>
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-seal"></i> $350</p>
-                        </li>
-                    </ul>
-                    <div class="mt-3 hstack gap-2">
-                        <span class="badge rounded-1 badge-soft-success">Completed</span>
-                    </div>
-                    <div class="mt-4 hstack gap-2">
-                        <a href="tournament-details" class="btn btn-soft-success w-100">View</a>
-                        <a href="#applyJobs" data-bs-toggle="modal" class="btn btn-soft-primary w-100">Enroll</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--end col-->
-        <div class="col-xl-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="favorite-icon">
-                        <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
-                    </div>
-                    <h5 class="fs-17 mb-2">Tournament #5</h5>
-                    <ul class="list-inline mb-0">
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-account-multiple"></i> 512</p>
-                        </li>
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-seal"></i> $350</p>
-                        </li>
-                    </ul>
-                    <div class="mt-3 hstack gap-2">
-                        <span class="badge rounded-1 badge-soft-success">Completed</span>
-                    </div>
-                    <div class="mt-4 hstack gap-2">
-                        <a href="tournament-details" class="btn btn-soft-success w-100">View</a>
-                        <a href="#applyJobs" data-bs-toggle="modal" class="btn btn-soft-primary w-100">Enroll</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--end col-->
-        <div class="col-xl-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="favorite-icon">
-                        <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
-                    </div>
-                    <h5 class="fs-17 mb-2">Tournament #6</h5>
-                    <ul class="list-inline mb-0">
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-account-multiple"></i> 1024</p>
-                        </li>
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-seal"></i> $350</p>
-                        </li>
-                    </ul>
-                    <div class="mt-3 hstack gap-2">
-                        <span class="badge rounded-1 badge-soft-warning">Upcoming</span>
-                    </div>
-                    <div class="mt-4 hstack gap-2">
-                        <a href="tournament-details" class="btn btn-soft-success w-100">View</a>
-                        <a href="#applyJobs" data-bs-toggle="modal" class="btn btn-soft-primary w-100">Enroll</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--end col-->
-        <div class="col-xl-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="favorite-icon">
-                        <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
-                    </div>
-                    <h5 class="fs-17 mb-2">Tournament #7</h5>
-                    <ul class="list-inline mb-0">
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-account-multiple"></i> 2048</p>
-                        </li>
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-seal"></i> $350</p>
-                        </li>
-                    </ul>
-                    <div class="mt-3 hstack gap-2">
-                        <span class="badge rounded-1 badge-soft-danger">Cancelled</span>
-                    </div>
-                    <div class="mt-4 hstack gap-2">
-                        <a href="tournament-details" class="btn btn-soft-success w-100">View</a>
-                        <a href="#applyJobs" data-bs-toggle="modal" class="btn btn-soft-primary w-100">Enroll</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--end col-->
+                                <div class="row">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label for="player-select-{{ $i }}" class="form-label">Player
+                                                    {{ $i }}</label>
+                                                <select class="form-select player-select"
+                                                    id="player-select-{{ $i }}" name="player_ids[]" required>
+                                                    <option value="" selected disabled>Select</option>
+                                                    @foreach ($players as $player)
+                                                        <option value="{{ $player->id }}">{{ $player->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="invalid-feedback">Please select a player.</div>
+                                            </div>
+                                        </div>
+                                    @endfor
+                                </div>
+                                <!--end row-->
+                            </form>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
 
-        <div class="col-xl-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="favorite-icon">
-                        <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
-                    </div>
-                    <h5 class="fs-17 mb-2">Tournament #8</h5>
-                    <ul class="list-inline mb-0">
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-account-multiple"></i> 4096</p>
-                        </li>
-                        <li>
-                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-seal"></i> $350</p>
-                        </li>
-                    </ul>
-                    <div class="mt-3 hstack gap-2">
-                        <span class="badge rounded-1 badge-soft-warning">Upcoming</span>
-                    </div>
-                    <div class="mt-4 hstack gap-2">
-                        <a href="tournament-details" class="btn btn-soft-success w-100">View</a>
-                        <a href="#applyJobs" data-bs-toggle="modal" class="btn btn-soft-primary w-100">Enroll</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--end col-->
-
+            <!--end col-->
+        @endforeach
     </div>
     <!--end row-->
 
     <div class="row justify-content-between align-items-center mb-3">
         <div class="col-auto me-auto">
-            <p class="text-muted mb-0">Showing <b>1</b> to <b>12</b> of <b>45</b> entries</p>
         </div>
         <div class="col-auto">
             <div class="card d-inline-block ms-auto mb-0">
@@ -256,115 +175,34 @@
         <!--end col-->
     </div>
     <!--end row-->
-
-    <!-- Modal -->
-    <div class="modal fade" id="applyJobs" tabindex="-1" aria-labelledby="applyJobsLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="applyJobsLabel">Enroll in the tournament</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="#!">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label for="designation-input" class="form-label">Player 1</label>
-                                    <select class="form-select" id="designation-input">
-                                        <option>Select</option>
-                                        <option value="2">Player 1 [USER ID: #AB12]</option>
-                                        <option value="2">Player 2 [USER ID: #AB12]</option>
-                                        <option value="2">Player 3 [USER ID: #AB12]</option>
-                                        <option value="2">Player 4 [USER ID: #AB12]</option>
-                                        <option value="2">Player 5 [USER ID: #AB12]</option>
-
-                                    </select>
-                                    <div class="invalid-feedback">Please select designation.</div>
-                                </div>
-                            </div>
-                            <!--end col-->
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label for="designation-input" class="form-label">Player 2</label>
-                                    <select class="form-select" id="designation-input">
-                                        <option>Select</option>
-                                        <option value="2">Player 1 [USER ID: #AB12]</option>
-                                        <option value="2">Player 2 [USER ID: #AB12]</option>
-                                        <option value="2">Player 3 [USER ID: #AB12]</option>
-                                        <option value="2">Player 4 [USER ID: #AB12]</option>
-                                        <option value="2">Player 5 [USER ID: #AB12]</option>
-
-                                    </select>
-                                    <div class="invalid-feedback">Please select designation.</div>
-                                </div>
-                            </div>
-                            <!--end col-->
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label for="designation-input" class="form-label">Player 3</label>
-                                    <select class="form-select" id="designation-input">
-                                        <option>Select</option>
-                                        <option value="2">Player 1 [USER ID: #AB12]</option>
-                                        <option value="2">Player 2 [USER ID: #AB12]</option>
-                                        <option value="2">Player 3 [USER ID: #AB12]</option>
-                                        <option value="2">Player 4 [USER ID: #AB12]</option>
-                                        <option value="2">Player 5 [USER ID: #AB12]</option>
-
-                                    </select>
-                                    <div class="invalid-feedback">Please select designation.</div>
-                                </div>
-                            </div>
-                            <!--end col-->
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label for="designation-input" class="form-label">Player 4</label>
-                                    <select class="form-select" id="designation-input">
-                                        <option>Select</option>
-                                        <option value="2">Player 1 [USER ID: #AB12]</option>
-                                        <option value="2">Player 2 [USER ID: #AB12]</option>
-                                        <option value="2">Player 3 [USER ID: #AB12]</option>
-                                        <option value="2">Player 4 [USER ID: #AB12]</option>
-                                        <option value="2">Player 5 [USER ID: #AB12]</option>
-
-                                    </select>
-                                    <div class="invalid-feedback">Please select designation.</div>
-                                </div>
-                            </div>
-                            <!--end col-->
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label for="designation-input" class="form-label">Player 5</label>
-                                    <select class="form-select" id="designation-input">
-                                        <option>Select</option>
-                                        <option value="2">Player 1 [USER ID: #AB12]</option>
-                                        <option value="2">Player 2 [USER ID: #AB12]</option>
-                                        <option value="2">Player 3 [USER ID: #AB12]</option>
-                                        <option value="2">Player 4 [USER ID: #AB12]</option>
-                                        <option value="2">Player 5 [USER ID: #AB12]</option>
-
-                                    </select>
-                                    <div class="invalid-feedback">Please select designation.</div>
-                                </div>
-                            </div>
-                            <!--end col-->
-                            <div class="col-lg-12">
-                                <div class="text-end">
-                                    <button class="btn btn-success">Submit <i
-                                            class="bx bx-send align-middle"></i></button>
-                                    <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                                </div>
-                            </div>
-                            <!--end col-->
-                        </div>
-                        <!--end row-->
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 @section('script')
     <script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/app.js') }}"></script>
+    <script>
+        // JavaScript to prevent duplicate player selections
+        document.addEventListener('DOMContentLoaded', function() {
+            const selects = document.querySelectorAll('.player-select');
+
+            selects.forEach(select => {
+                select.addEventListener('change', function() {
+                    const selectedValues = Array.from(selects).map(s => s.value);
+                    selects.forEach(s => {
+                        Array.from(s.options).forEach(option => {
+                            if (option.value && selectedValues.includes(option
+                                    .value)) {
+                                if (s !== select || option.value !== select.value) {
+                                    option.disabled = true;
+                                } else {
+                                    option.disabled = false;
+                                }
+                            } else {
+                                option.disabled = false;
+                            }
+                        });
+                    });
+                });
+            });
+        });
+    </script>
 @endsection

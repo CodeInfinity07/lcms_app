@@ -19,7 +19,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id', // Role foreign key
+        'role_id',
+        'whatsapp_number',
+        'club_id',
     ];
 
     /**

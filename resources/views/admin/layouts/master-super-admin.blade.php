@@ -17,7 +17,7 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
         @include('admin.layouts.topbar')
-        @include('admin.layouts.sidebar')
+        @include('admin.layouts.super-admin-sidebar')
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->

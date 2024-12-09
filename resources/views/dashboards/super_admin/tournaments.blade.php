@@ -1,7 +1,7 @@
-@extends('admin.layouts.master')
+@extends('admin.layouts.master-super-admin')
 
 @section('title')
-    Management
+    Clubs
 @endsection
 @section('css')
     <!-- select2 css -->
@@ -58,11 +58,13 @@
                             <thead class="table-light">
                                 <tr>
                                     <th scope="col" style="width: 40px;">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Designation</th>
-                                    <th scope="col">WhatsApp</th>
-                                    <th scope="col" style="width: 200px;">Action</th>
+                                    <th scope="col">Prize</th>
+                                    <th scope="col">Participants</th>
+                                    <th scope="col">Mode</th>
+                                    <th scope="col">Fee</th>
+                                    <th scope="col">Format</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col" style="width: 200px;">Registered</th>
                                 </tr>
                             </thead>
                         </table>
@@ -79,48 +81,58 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="newContactModalLabel">Add Staff</h5>
+                    <h5 class="modal-title" id="newContactModalLabel">Add Tournament</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form autocomplete="off" method="POST" action="{{ route('owner.create.admin') }}" class="needs-validation createAdmin-form" id="createAdmin-form" novalidate>
+                    <form autocomplete="off" class="createOwner-form" id="createTournament" method="POST"
+                        action="{{ route('super-admin.tournament.create') }}" novalidate>
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <input type="hidden" class="form-control" id="userid-input">
                                 <div class="mb-3">
-                                    <label for="name-input" class="form-label">Name</label>
-                                    <input type="text" id="name-input" name="name" class="form-control" placeholder="Enter Name"
-                                        required />
-                                    <div class="invalid-feedback">Please enter name.</div>
+                                    <label for="prize-input" class="form-label">Prize</label>
+                                    <input type="number" id="prize-input" name="prize" class="form-control"
+                                        placeholder="Enter Prize" required />
+                                    <div class="invalid-feedback">Please enter prize.</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="designation-input" class="form-label">Designation</label>
-                                    <select class="form-select" name="designation" id="designation-input">
+                                    <label for="participants-input" class="form-label">Participants</label>
+                                    <input type="number" id="participants-input" name="participants" class="form-control"
+                                        placeholder="Enter Participants" required />
+                                    <div class="invalid-feedback">Please enter Participants.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fee-input" class="form-label">Entry Fee</label>
+                                    <input type="number" id="fee-input" name="fee" class="form-control"
+                                        placeholder="Enter Entry Fee" required />
+                                    <div class="invalid-feedback">Please enter Entry fee.</div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="starting-date-input" class="form-label">Date</label>
+                                    <div class="">
+                                        <input class="form-control" type="date" id="starting-date-input"
+                                            name="starting_date">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="format-input" class="form-label">Format</label>
+                                    <select class="form-select" name="format" id="format-input">
                                         <option value="">Select</option>
-                                        @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                        @endforeach
+                                        <option value="1">1 v 1</option>
+                                        <option value="2">Team up</option>
                                     </select>
                                     <div class="invalid-feedback">Please select designation.</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email-input" class="form-label">Email</label>
-                                    <input type="email" id="email-input" name="email" class="form-control" placeholder="Enter email"
-                                        required />
-                                    <div class="invalid-feedback">Please enter email.</div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password-input" class="form-label">Password</label>
-                                    <input type="password" id="password-input" name="password" class="form-control" placeholder="Enter Password"
-                                        required />
-                                    <div class="invalid-feedback">Please enter Password.</div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="whatsapp-input" class="form-label">WhatsApp</label>
-                                    <input type="text" id="whatsapp-input" class="form-control"
-                                        placeholder="Enter WhatsApp Number" name="whatsapp_number" required />
-                                    <div class="invalid-feedback">Please enter WhatsApp Number.</div>
+                                    <label for="mode-input" class="form-label">Mode</label>
+                                    <select class="form-select" name="mode" id="mode-input">
+                                        <option value="">Select</option>
+                                        <option value="1">Single Elimination</option>
+                                        <option value="2">Double Elimination</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select designation.</div>
                                 </div>
                             </div>
 
@@ -129,7 +141,7 @@
                                     <button type="button" class="btn btn-outline-secondary"
                                         data-bs-dismiss="modal">Cancel</button>
                                     <button type="submit" id="addContact-btn" class="btn btn-success">Add
-                                        Member</button>
+                                        Tournament</button>
                                 </div>
                             </div>
                         </div>
@@ -180,5 +192,5 @@
     <script src="{{ URL::asset('/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
 
     <!-- ecommerce-customer-list init -->
-    <script src="{{ URL::asset('/assets/js/pages/admin-list.js') }}"></script>
+    <script src="{{ URL::asset('/assets/js/pages/tournament.js') }}"></script>
 @endsection

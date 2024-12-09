@@ -50,9 +50,11 @@ class LoginController extends Controller
                 return redirect()->route('admin.dashboard');
             } elseif ($user->role->name === 'Member') {
                 return redirect()->route('member.dashboard');
+            } elseif ($user->role->name === 'Super Admin') {
+                return redirect()->route('super-admin.dashboard');
             }
 
-            return redirect()->route('home');
+            return redirect()->route('root');
         }
 
         // Authentication failed

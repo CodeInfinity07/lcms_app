@@ -4,6 +4,7 @@
         "memberImg": "",
         "userName": "Shahid Afridi",
         "email": "shahid@LT.com",
+        "whatsapp": "03207491913",
         "tags": ["Admin"]
     },
     {
@@ -11,6 +12,7 @@
         "memberImg": "",
         "userName": "Abbas Afridi",
         "email": "abbas@LT.com",
+        "whatsapp": "03207491913",
         "tags": ["Member"]
     }
 ]

@@ -17,23 +17,10 @@
                 </li>
                 <li>
                     <a href="tournaments" class="waves-effect">
-                        <i class="bx bx-medal"></i>
-                        <span key="t-dashboards">Tournaments</span>
+                        <i class="bx bx-trophy"></i>
+                        <span key="t-dashboards">Tournament</span>
                     </a>
                 </li>
-                <li>
-                    <a href="matches" class="waves-effect">
-                        <i class="bx bx-dice-6"></i>
-                        <span key="t-dashboards">Matches</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="management" class="waves-effect">
-                        <i class="bx bx-male-female"></i>
-                        <span key="t-dashboards">Users</span>
-                    </a>
-                </li>
-
             </ul>
         </div>
         <!-- Sidebar -->
