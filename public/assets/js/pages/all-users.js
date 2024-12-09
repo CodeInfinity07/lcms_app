@@ -59,7 +59,7 @@ function loadUserList(datas) {
                         case 3:
                             return '<span class="badge badge-soft-danger">Member</span>';
                         case 5:
-                            return '<span class="badge badge-soft-light">Super Admin</span>';
+                            return '<span class="badge badge-soft-secondary">Super Admin</span>';
                         case 6:
                             return '<span class="badge badge-soft-info">Super Owner</span>';
                         default:
