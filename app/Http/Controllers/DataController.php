@@ -37,6 +37,13 @@ class DataController extends Controller
         return response()->json($users);
     }
 
+    public function superAdmins()
+    {
+        $users = User::where('role_id', 5)
+            ->get();
+        return response()->json($users);
+    }
+
     public function delete(Request $request, $id)
     {
         // Get the authenticated user
@@ -98,6 +105,25 @@ class DataController extends Controller
 
         // Check if the user's role_id is >= 5
         if ($user->role_id == 1 && $user->club_id == $userToDelete->club_id) {
+            $userToDelete->delete();
+        } else {
+            return response()->json(['error' => 'Unauthorized'], 403);
+
+        }
+
+        return response()->json(['message' => 'User deleted successfully'], 200);
+    }
+
+    public function deletesuperAdmins(Request $request, $id)
+    {
+        $user = auth()->user();
+        $userToDelete = User::find(id: $id);
+
+        if (!$userToDelete) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        if ($user->role_id == 6) {
             $userToDelete->delete();
         } else {
             return response()->json(['error' => 'Unauthorized'], 403);

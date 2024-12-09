@@ -31,6 +31,11 @@ class SuperOwnerDashboardController extends Controller
         return view('dashboards.super_owner.owners');
     }
 
+    public function superAdmins()
+    {
+        return view('dashboards.super_owner.super-admins');
+    }
+
     public function createOwner(Request $request)
     {
         $request->validate([
@@ -93,5 +98,31 @@ class SuperOwnerDashboardController extends Controller
 
         // Redirect back with success message
         return redirect()->back()->with('success', 'Tournament created successfully!');
+    }
+    public function createSuperAdmin(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'password' => 'required|string|max:255',
+            'whatsapp_number' => 'required|string|max:255',
+        ]);
+
+        try {
+
+            $user = User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'role_id' => 5,
+                'whatsapp_number' => $request->input(key: 'whatsapp_number'),
+            ]);
+
+            // Redirect back with a success message
+            return redirect()->back()->with('success', 'User created successfully!');
+        } catch (\Exception $e) {
+            // Redirect back with an error message
+            return redirect()->back()->withErrors(['error' => 'An error occurred: ' . $e->getMessage()]);
+        }
     }
 }
