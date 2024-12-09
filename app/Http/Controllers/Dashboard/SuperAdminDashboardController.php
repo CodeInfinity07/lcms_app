@@ -16,7 +16,7 @@ class SuperAdminDashboardController extends Controller
     {
         return view('dashboards.super_admin.index');
     }
-
+    
     public function tournaments()
     {
         return view('dashboards.super_admin.tournaments');
