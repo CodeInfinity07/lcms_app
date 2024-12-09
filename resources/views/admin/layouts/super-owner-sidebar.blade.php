@@ -16,15 +16,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="owners" class="waves-effect">
-                        <i class="bx bx-male-female"></i>
-                        <span key="t-dashboards">Club Owners</span>
-                    </a>
-                </li>
-                <li>
                     <a href="super-admins" class="waves-effect">
                         <i class="bx bx-male-female"></i>
                         <span key="t-dashboards">Super Admins</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="owners" class="waves-effect">
+                        <i class="bx bx-male-female"></i>
+                        <span key="t-dashboards">Club Owners</span>
                     </a>
                 </li>
                 <li>
