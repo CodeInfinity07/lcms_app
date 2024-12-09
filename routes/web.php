@@ -4,6 +4,7 @@ require __DIR__ . '/admin.php';
 require __DIR__ . '/member.php';
 require __DIR__ . '/owner.php';
 require __DIR__ . '/super-admin.php';
+require __DIR__ . '/super-owner.php';
 require __DIR__ . '/api.php';
 
 use Illuminate\Support\Facades\Route;

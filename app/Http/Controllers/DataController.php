@@ -14,6 +14,12 @@ class DataController extends Controller
         $users = User::where('role_id', 1)->get();
         return response()->json($users);
     }
+
+    public function all_users()
+    {
+        $users = User::orderByRaw('CASE WHEN role_id = 3 THEN 1 ELSE 0 END, role_id DESC')->get();
+        return response()->json($users);
+    }
     public function tournaments()
     {
         $tournament = Tournament::all();
@@ -29,6 +35,30 @@ class DataController extends Controller
             ->orderBy('role_id', 'asc') // Sort by role_id in ascending order
             ->get();
         return response()->json($users);
+    }
+
+    public function delete(Request $request, $id)
+    {
+        // Get the authenticated user
+        $user = auth()->user();
+
+
+        // Check if the user's role_id is >= 5
+        if ($user->role_id < 5) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        // Find the user to delete
+        $userToDelete = User::find($id);
+
+        if (!$userToDelete) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        // Delete the user
+        $userToDelete->delete();
+
+        return response()->json(['message' => 'User deleted successfully'], 200);
     }
     public function deleteUser(Request $request, $id)
     {

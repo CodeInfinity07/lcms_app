@@ -11,7 +11,7 @@ var editList = false;
 
 // Fetch user data from Laravel API
 var getDatabaseData = function (callback) {
-    fetch('/api/owners')
+    fetch('/api/allUsers')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
@@ -36,7 +36,7 @@ function loadUserList(datas) {
     $('#userList-table').DataTable({
         data: datas,
         "bLengthChange": false,
-        order: [[0, 'desc']],
+        order: false,
         language: {
             oPaginate: {
                 sNext: '<i class="mdi mdi-chevron-right"></i>',
@@ -51,15 +51,23 @@ function loadUserList(datas) {
                 data: "role_id",
                 title: "Role",
                 render: function (data) {
-                    return data === 1
-                        ? '<span class="badge badge-soft-success">Owner</span>'
-                        : '<span class="badge badge-soft-danger">User</span>';
+                    switch (data) {
+                        case 1:
+                            return '<span class="badge badge-soft-primary">Owner</span>';
+                        case 2:
+                            return '<span class="badge badge-soft-success">Admin</span>';
+                        case 3:
+                            return '<span class="badge badge-soft-danger">Member</span>';
+                        case 5:
+                            return '<span class="badge badge-soft-light">Super Admin</span>';
+                        case 6:
+                            return '<span class="badge badge-soft-info">Super Owner</span>';
+                        default:
+                            return '<span class="badge badge-soft-secondary">Unknown</span>';
+                    }
                 }
             },
-            {
-                data: "whatsapp_number",
-                title: "WhatsApp Number",
-            },
+            { data: "whatsapp_number", title: "WhatsApp" },
             {
                 data: null,
                 title: "Actions",
@@ -117,7 +125,7 @@ function removeItem() {
         item.addEventListener('click', function () {
             var getId = item.getAttribute('data-remove-id'); // Get the ID to delete
             document.getElementById("remove-item").addEventListener("click", function () {
-                fetch(`/api/owners/${getId}`, {
+                fetch(`/api/allUsers/${getId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
