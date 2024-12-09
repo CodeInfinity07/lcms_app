@@ -9,6 +9,5 @@ Route::middleware(['auth', 'role:Super Owner'])->group(
         Route::get('/super-owner/dashboard', [SuperOwnerDashboardController::class, 'index'])->name('super-owner.dashboard');
         Route::post('/super-owner/create-owner', [SuperOwnerDashboardController::class, 'createOwner'])->name('super-owner.owner.create');
         Route::post('/super-owner/create-tournament', [SuperOwnerDashboardController::class, 'createTournament'])->name('super-owner.tournament.create');
-
     }
 );
