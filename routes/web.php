@@ -19,8 +19,9 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-
+Route::get('/register', function () {
+    return view('login');
+});
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
 Route::get('/tournaments', function () {
