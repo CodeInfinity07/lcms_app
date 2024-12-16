@@ -75,7 +75,7 @@ class MemberSeeder extends Seeder
             $separator = $separators[array_rand($separators)];
 
             // Generate email
-            $email = $firstName . $separator . $lastName . '@lt.com';
+            $email = $firstName . $separator . $lastName . rand(1, 99) . '@lt.com';
 
             $users[] = [
                 'name' => $name,
