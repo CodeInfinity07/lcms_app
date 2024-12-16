@@ -11,7 +11,9 @@ class DataController extends Controller
 {
     public function owners()
     {
-        $users = User::where('role_id', 1)->get();
+        $users = User::where('role_id', 1)
+            ->orderBy('whatsapp_number', 'asc') // Sort by WhatsApp number in ascending order
+            ->get();
         return response()->json($users);
     }
 
