@@ -36,7 +36,7 @@ function loadUserList(datas) {
     $('#userList-table').DataTable({
         data: datas,
         "bLengthChange": false,
-        order: [[0, 'desc']],
+        order: false,
         language: {
             oPaginate: {
                 sNext: '<i class="mdi mdi-chevron-right"></i>',
