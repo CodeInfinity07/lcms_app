@@ -13,7 +13,6 @@ class SuperOwnerDashboardController extends Controller
     public function index()
     {
         $club_count = Club::count();
-        $club_count = $club_count + 31;
         $users_count = User::count();
         $active_tournaments_count = Tournament::where('status', 0)->count();
         $total_prize = Tournament::where('status', 1)->sum('prize'); // Adding total prize calculation
